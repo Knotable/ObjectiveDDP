@@ -40,6 +40,11 @@ typedef void(^MeteorClientMethodCallback)(NSDictionary *response, NSError *error
 @property (nonatomic, copy, readonly) NSString *ddpVersion;
 @property (nonatomic, strong ,readonly) NSArray *supportedVersions;
 
+#pragma mark - Custom Metadata
+/// @name Accessing Custom Metadata
+@property (nullable, copy, nonatomic) NSDictionary* customMetadata;
+
+
 // In flux; use "pre1" for meteor versions up to v0.8.0.1
 //          use "pre2" for meteor versions v0.8.1.1 and above (until they change it again)
 //          use "1" for meteor versions v0.8.9 and above

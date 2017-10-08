@@ -82,7 +82,17 @@ double const MeteorClientMaxRetryIncrease = 6;
     if (![self okToSend]) {
         return;
     }
-    [self.ddp subscribeWith:uid name:subscriptionName parameters:parameters];
+    
+    NSArray* parametersToSend = parameters;
+    if (_customMetadata){
+        if([parameters containsObject:_customMetadata]){
+            NSMutableArray* paramsWithCustomMetadata = [NSMutableArray arrayWithArray:parameters];
+            [paramsWithCustomMetadata addObject:_customMetadata];
+            parametersToSend = paramsWithCustomMetadata;
+        }
+    }
+
+    [self.ddp subscribeWith:uid name:subscriptionName parameters:parametersToSend];
 }
 
 - (void)removeSubscription:(NSString *)subscriptionName {
@@ -393,9 +403,20 @@ double const MeteorClientMaxRetryIncrease = 6;
     if(notify == YES) {
         [_methodIds addObject:methodId];
     }
+    
+    NSArray* parametersToSend = parameters;
+    if (_customMetadata){
+        if([parameters containsObject:_customMetadata]){
+            NSMutableArray* paramsWithCustomMetadata = [NSMutableArray arrayWithArray:parameters];
+            [paramsWithCustomMetadata addObject:_customMetadata];
+            parametersToSend = paramsWithCustomMetadata;
+        }
+    }
+    
     [self.ddp methodWithId:methodId
                     method:methodName
-                parameters:parameters];
+                parameters:parametersToSend];
+    
     return methodId;
 }
 
