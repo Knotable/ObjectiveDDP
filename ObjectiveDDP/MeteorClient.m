@@ -85,7 +85,7 @@ double const MeteorClientMaxRetryIncrease = 6;
     
     NSArray* parametersToSend = parameters;
     if (_customMetadata){
-        if([parameters containsObject:_customMetadata]){
+        if(![parameters containsObject:_customMetadata]){
             NSMutableArray* paramsWithCustomMetadata = [NSMutableArray arrayWithArray:parameters];
             [paramsWithCustomMetadata addObject:_customMetadata];
             parametersToSend = paramsWithCustomMetadata;
@@ -406,7 +406,7 @@ double const MeteorClientMaxRetryIncrease = 6;
     
     NSArray* parametersToSend = parameters;
     if (_customMetadata){
-        if([parameters containsObject:_customMetadata]){
+        if(![parameters containsObject:_customMetadata]){
             NSMutableArray* paramsWithCustomMetadata = [NSMutableArray arrayWithArray:parameters];
             [paramsWithCustomMetadata addObject:_customMetadata];
             parametersToSend = paramsWithCustomMetadata;
